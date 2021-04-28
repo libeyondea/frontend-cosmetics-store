@@ -374,12 +374,14 @@ ol {
 	color: #252525;
 	display: inline-block;
 	padding-left: 20px;
-	border-left: 1px solid #e5e5e5;
+	padding-right: 20px;
+	border-right: 1px solid #e5e5e5;
 	padding-top: 18px;
 	padding-bottom: 15px;
 }
 
-.header-top .ht-right .login-panel i {
+.header-top .ht-right .login-panel i,
+.header-top .ht-right .top-panel-user i {
 	margin-right: 8px;
 }
 
@@ -3781,8 +3783,9 @@ ol {
 }
 
 .register-form form .group-input input,
+.register-form form .group-input select,
 .login-form form .group-input input {
-	border: 1px solid #ebebeb;
+	/* border: 1px solid #ebebeb; */
 	height: 50px;
 	width: 100%;
 	padding-left: 20px;
@@ -4486,4 +4489,133 @@ ol {
 
 .product-thumbs .nav-link {
 	padding: 0;
+}
+
+/* btn */
+
+.site-btn.disabled,
+.site-btn:disabled {
+	color: #fff;
+	background: #e3ba6d;
+	border: 1px solid #e3b35a;
+}
+
+.site-btn.disabled,
+.site-btn:disabled {
+	opacity: 0.65;
+}
+
+/* Social button */
+
+.facebook-login-button {
+	border: 0px;
+	border-radius: 5px;
+	box-shadow: rgb(0 0 0 / 50%) 0px 1px 2px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	font-size: 19px;
+	/* margin: 5px; */
+	margin-bottom: 10px;
+	width: 100%;
+	overflow: hidden;
+	padding: 0px 10px;
+	user-select: none;
+	height: 50px;
+	background: rgb(59, 89, 152);
+}
+.facebook-login-button:hover,
+.facebook-login-button:focus {
+	background: rgb(41, 62, 105) !important;
+}
+
+.google-login-button {
+	border: 0px;
+	border-radius: 3px;
+	box-shadow: rgb(0 0 0 / 50%) 0px 1px 2px;
+	color: black;
+	cursor: pointer;
+	font-size: 19px;
+	/* margin: 5px; */
+	margin-bottom: 10px;
+	width: 100%;
+	overflow: hidden;
+	padding: 0px 10px;
+	user-select: none;
+	height: 50px;
+	background: white;
+}
+.google-login-button:hover,
+.google-login-button:focus {
+	background: rgb(239, 240, 238) !important;
+}
+
+.github-login-button {
+	border: 0px;
+	border-radius: 3px;
+	box-shadow: rgb(0 0 0 / 50%) 0px 1px 2px;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	font-size: 19px;
+	/* margin: 5px; */
+	margin-bottom: 10px;
+	width: calc(100% - 0);
+	overflow: hidden;
+	padding: 0px 10px;
+	user-select: none;
+	height: 50px;
+	background: rgb(51, 51, 51);
+}
+.github-login-button:hover,
+.github-login-button:focus {
+	background: rgb(85, 85, 85) !important;
+}
+
+.facebook-login-button .body-social,
+.google-login-button .body-social,
+.github-login-button .body-social {
+	align-items: center;
+	display: flex;
+	height: 100%;
+}
+.facebook-login-button .body-social .icon-social,
+.google-login-button .body-social .icon-social,
+.github-login-button .body-social .icon-social {
+	display: flex;
+	justify-content: center;
+	min-width: 26px;
+}
+
+.facebook-login-button .body-social .text-social,
+.google-login-button .body-social .text-social,
+.github-login-button .body-social .text-social {
+	text-align: left;
+	width: 100%;
+	margin-left: 0.5rem;
+}
+/*  */
+.top-panel-user {
+	float: right;
+	padding-top: 18px;
+	padding-bottom: 15px;
+}
+
+.top-panel-user a {
+	color: #252525;
+	font-size: 14px;
+}
+
+.top-panel-user a:hover,
+.top-panel-user a:focus {
+	color: #252525;
+}
+
+.dropdown-toggle-custom::after {
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
 }

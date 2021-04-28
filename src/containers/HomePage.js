@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
 import CarouselHome from '../components/CarouselHome';
 import BannerHome from '../components/BannerHome';
 import CountDownSell from '../components/CountDownSell';
 import Carousel from 'react-multi-carousel';
+import { listProductRequestedAction } from '../redux/actions/productAction';
+import MayBeSpinner from 'components/MayBeSpinner';
+import withAuth from 'lib/hoc/withAuth';
 
 const HomePage = ({ props }) => {
 	const responsive = {
@@ -29,6 +33,13 @@ const HomePage = ({ props }) => {
 			slidesToSlide: 1
 		}
 	};
+	const dispatch = useDispatch();
+	const listProduct = useSelector((state) => state.products.list_product);
+
+	useEffect(() => {
+		dispatch(listProductRequestedAction());
+	}, []);
+
 	return (
 		<Layout>
 			<section className="hero-section">
@@ -48,74 +59,42 @@ const HomePage = ({ props }) => {
 					</div>
 					<div className="row">
 						<div className="col-12">
-							<div className="filter-control">
-								<ul>
-									<li className="active">Clothings</li>
-									<li>HandBag</li>
-									<li>Shoes</li>
-									<li>Accessories</li>
-								</ul>
-							</div>
-							<Carousel
-								swipeable={true}
-								draggable={true}
-								showDots={true}
-								responsive={responsive}
-								ssr={true}
-								infinite={true}
-								minimumTouchDrag={80}
-								autoPlay={false}
-								autoPlaySpeed={1000}
-								keyBoardControl={true}
-								transitionDuration={1000}
-								containerClass="carousel-container"
-								removeArrowOnDeviceType={['tablet', 'mobile']}
-								dotListClass="custom-dot-list-style"
-								itemClass="px-3"
-							>
-								<ProductCard
-									title="Product 1"
-									price="500000"
-									discount="90000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-								<ProductCard
-									title="Product 2"
-									price="500000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-								<ProductCard
-									title="Product 3"
-									price="500000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-								<ProductCard
-									title="Product 4"
-									price="500000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-								<ProductCard
-									title="Product 5"
-									price="500000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-							</Carousel>
+							<MayBeSpinner test={listProduct.is_loading} spinner={<>Loading...</>}>
+								<Carousel
+									swipeable={true}
+									draggable={true}
+									showDots={true}
+									responsive={responsive}
+									ssr={true}
+									infinite={true}
+									minimumTouchDrag={80}
+									autoPlay={true}
+									autoPlaySpeed={1000}
+									keyBoardControl={true}
+									transitionDuration={1000}
+									containerClass="carousel-container"
+									removeArrowOnDeviceType={['tablet', 'mobile']}
+									dotListClass="custom-dot-list-style"
+									itemClass="px-3"
+								>
+									{listProduct.products?.map((product) => (
+										<ProductCard
+											title={product.title}
+											price={product.price}
+											discount={product.discount}
+											image={product.images[0]?.image_url}
+											slug={product.slug}
+											category_title={product.category?.title}
+											key={product.id}
+										/>
+									))}
+								</Carousel>
+							</MayBeSpinner>
 						</div>
 					</div>
 				</div>
 			</section>
-			<CountDownSell />
-			<section className="man-banner spad">
+			<section className="man-banner spad pt-0">
 				<div className="container-fluid">
 					<div className="row">
 						<div className="col-lg-12">
@@ -126,14 +105,6 @@ const HomePage = ({ props }) => {
 					</div>
 					<div className="row">
 						<div className="col-12">
-							<div className="filter-control">
-								<ul>
-									<li className="active">Clothings</li>
-									<li>HandBag</li>
-									<li>Shoes</li>
-									<li>Accessories</li>
-								</ul>
-							</div>
 							<Carousel
 								swipeable={true}
 								draggable={true}
@@ -151,42 +122,17 @@ const HomePage = ({ props }) => {
 								dotListClass="custom-dot-list-style"
 								itemClass="px-3"
 							>
-								<ProductCard
-									title="Product 1"
-									price="500000"
-									discount="90000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-								<ProductCard
-									title="Product 2"
-									price="500000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-								<ProductCard
-									title="Product 3"
-									price="500000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-								<ProductCard
-									title="Product 4"
-									price="500000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
-								<ProductCard
-									title="Product 5"
-									price="500000"
-									image="http://placehold.it/666x666"
-									slug="product"
-									category_title="Trang điểm"
-								/>
+								{listProduct.products?.map((product) => (
+									<ProductCard
+										title={product.title}
+										price={product.price}
+										discount={product.discount}
+										image={product.images[0]?.image_url}
+										slug={product.slug}
+										category_title={product.category?.title}
+										key={product.id}
+									/>
+								))}
 							</Carousel>
 						</div>
 					</div>
@@ -196,4 +142,4 @@ const HomePage = ({ props }) => {
 	);
 };
 
-export default HomePage;
+export default withAuth(HomePage);

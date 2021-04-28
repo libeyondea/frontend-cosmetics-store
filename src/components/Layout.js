@@ -7,6 +7,10 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import NavItem from 'react-bootstrap/NavItem';
 import NavLink from 'react-bootstrap/NavLink';
 import Carousell from 'react-multi-carousel';
+import { useDispatch, useSelector } from 'react-redux';
+import useRouter from 'lib/hooks/useRouter';
+import { logoutUserRequestedAction } from 'redux/actions/userAction';
+import Maybe from './Maybe';
 
 const Layout = ({ children }) => {
 	const responsive = {
@@ -31,6 +35,15 @@ const Layout = ({ children }) => {
 			slidesToSlide: 1
 		}
 	};
+	const dispatch = useDispatch();
+	const router = useRouter();
+	const login = useSelector((state) => state.users.login);
+
+	const handleLogoutUser = (e) => {
+		e.preventDefault();
+		dispatch(logoutUserRequestedAction(router));
+	};
+
 	return (
 		<>
 			<header className="header-section">
@@ -47,21 +60,31 @@ const Layout = ({ children }) => {
 							</div>
 						</div>
 						<div className="ht-right">
-							<a href="#!" className="login-panel">
-								<i className="fa fa-user" />
-								Login
-							</a>
-
-							{/* <div className="lan-selector">
-								<select className="language_drop" name="countries" id="countries" style={{ width: 300 }}>
-									<option value="yt" data-image="img/flag-1.jpg" data-imagecss="flag yt" data-title="English">
-										English
-									</option>
-									<option value="yu" data-image="img/flag-2.jpg" data-imagecss="flag yu" data-title="Bangladesh">
-										German{' '}
-									</option>
-								</select>
-							</div> */}
+							<Maybe test={login.is_authenticated}>
+								<Dropdown as={NavItem} className="top-panel-user bg-white">
+									<Dropdown.Toggle as={NavLink} id="dropdown-custom-1" className="pt-0 pb-0 dropdown-toggle-custom">
+										<i className="fa fa-user" />
+										{login.user?.user_name}
+									</Dropdown.Toggle>
+									<Dropdown.Menu align="right">
+										<Dropdown.Item as={Link} to="/">
+											Profile
+										</Dropdown.Item>
+										<Dropdown.Divider />
+										<Dropdown.Item onClick={handleLogoutUser}>Logout</Dropdown.Item>
+									</Dropdown.Menu>
+								</Dropdown>
+							</Maybe>
+							<Maybe test={!login.is_authenticated}>
+								<Link to="/register" className="login-panel">
+									<i className="fa fa-user" />
+									Register
+								</Link>
+								<Link to="/login" className="login-panel">
+									<i className="fa fa-user" />
+									Login
+								</Link>
+							</Maybe>
 
 							<div className="top-social">
 								<a href="#!">

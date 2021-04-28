@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({ title, price, discount, image, slug, category_title }) => {
 	return (
-		<div className="product-item">
+		<div className="product-item border rounded bg-light shadow">
 			<div className="pi-pic">
 				<Link to={`/p/${slug}`}>
-					<img src={image} alt={title} />
+					<img src={`${process.env.REACT_APP_URL}/images/${image}`} alt={title} />
 				</Link>
 				{(parseInt(discount) > 0 || discount) && <div className="sale">Sale</div>}
 				<div className="icon">
