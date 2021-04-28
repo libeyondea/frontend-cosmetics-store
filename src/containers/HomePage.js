@@ -37,7 +37,7 @@ const HomePage = ({ props }) => {
 
 	useEffect(() => {
 		dispatch(listProductRequestedAction());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<Layout>
