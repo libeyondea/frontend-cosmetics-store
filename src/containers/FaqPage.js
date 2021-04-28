@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
 import Layout from '../components/Layout';
 
-const FaqPage = ({ props }) => {
+const FaqPage = () => {
 	const [openOne, setOpenOne] = useState(true);
 	const [openTwo, setOpenTwo] = useState(false);
 	const [openThree, setOpenThree] = useState(false);
@@ -13,7 +13,7 @@ const FaqPage = ({ props }) => {
 					<div className="row">
 						<div className="col-lg-12">
 							<div className="breadcrumb-text">
-								<a href="#">
+								<a href="#!">
 									<i className="fa fa-home" /> Home
 								</a>
 								<span>FAQs</span>
@@ -45,9 +45,10 @@ const FaqPage = ({ props }) => {
 											<div id="collapseOne">
 												<div className="card-body">
 													<p>
-														Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-														ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-														laboris nisi ut aliquip ex ea commodo consequat.
+														Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+														tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+														veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+														commodo consequat.
 													</p>
 												</div>
 											</div>
@@ -70,9 +71,10 @@ const FaqPage = ({ props }) => {
 											<div id="collapseTwo">
 												<div className="card-body">
 													<p>
-														Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-														ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-														laboris nisi ut aliquip ex ea commodo consequat.
+														Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+														tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+														veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+														commodo consequat.
 													</p>
 												</div>
 											</div>
@@ -95,9 +97,10 @@ const FaqPage = ({ props }) => {
 											<div id="collapseThree">
 												<div className="card-body">
 													<p>
-														Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-														ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-														laboris nisi ut aliquip ex ea commodo consequat.
+														Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+														tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+														veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+														commodo consequat.
 													</p>
 												</div>
 											</div>

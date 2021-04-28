@@ -94,7 +94,12 @@ const CategoryProductPage = ({ props }) => {
 										<div className="bc-item" key={item.id}>
 											<label htmlFor={item.slug}>
 												{item.title}
-												<input name="brand" type="checkbox" id={item.slug} onChange={handleCheckboxChange} />
+												<input
+													name="brand"
+													type="checkbox"
+													id={item.slug}
+													onChange={handleCheckboxChange}
+												/>
 												<span className="checkmark" />
 											</label>
 										</div>
@@ -137,7 +142,7 @@ const CategoryProductPage = ({ props }) => {
 								<div className="row">
 									<div className="col-lg-7 col-md-7">
 										<div className="select-option">
-											<select class="custom-select sorting" defaultValue="desc">
+											<select className="custom-select sorting" defaultValue="desc">
 												<option value="asc">Asc date</option>
 												<option value="desc">Desc date</option>
 												<option value="asc">Asc price</option>
@@ -145,7 +150,7 @@ const CategoryProductPage = ({ props }) => {
 												<option value="asc">Asc selling</option>
 												<option value="desc">Desc selling</option>
 											</select>
-											<select class="custom-select p-show" defaultValue="10">
+											<select className="custom-select p-show" defaultValue="10">
 												<option value="10">Show: 10</option>
 												<option value="20">Show: 20</option>
 												<option value="50">Show: 50</option>

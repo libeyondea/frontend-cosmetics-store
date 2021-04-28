@@ -4,7 +4,6 @@ import Layout from '../components/Layout';
 import ProductCard from '../components/ProductCard';
 import CarouselHome from '../components/CarouselHome';
 import BannerHome from '../components/BannerHome';
-import CountDownSell from '../components/CountDownSell';
 import Carousel from 'react-multi-carousel';
 import { listProductRequestedAction } from '../redux/actions/productAction';
 import MayBeSpinner from 'components/MayBeSpinner';

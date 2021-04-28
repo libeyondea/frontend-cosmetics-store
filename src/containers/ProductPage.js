@@ -31,19 +31,31 @@ const ProductPage = ({ props }) => {
 									<Tab.Container id="image-tab" defaultActiveKey="first">
 										<Tab.Content className="product-pic-zoom">
 											<Tab.Pane eventKey="first">
-												<img className="product-big-img" src="http://placehold.it/400x500" alt />
+												<img
+													className="product-big-img"
+													src="http://placehold.it/400x500"
+													alt="img"
+												/>
 												<div className="zoom-icon">
 													<i className="fa fa-search-plus" />
 												</div>
 											</Tab.Pane>
 											<Tab.Pane eventKey="second">
-												<img className="product-big-img" src="http://placehold.it/400x500" alt />
+												<img
+													className="product-big-img"
+													src="http://placehold.it/400x500"
+													alt="img"
+												/>
 												<div className="zoom-icon">
 													<i className="fa fa-search-plus" />
 												</div>
 											</Tab.Pane>
 											<Tab.Pane eventKey="third">
-												<img className="product-big-img" src="http://placehold.it/400x500" alt />
+												<img
+													className="product-big-img"
+													src="http://placehold.it/400x500"
+													alt="img"
+												/>
 												<div className="zoom-icon">
 													<i className="fa fa-search-plus" />
 												</div>
@@ -53,17 +65,17 @@ const ProductPage = ({ props }) => {
 											<Nav className="product-thumbs-track ps-slider owl-carousel">
 												<Nav.Item>
 													<Nav.Link className="pt mr-3 mb-3" eventKey="first">
-														<img src="http://placehold.it/400x500" width="100" alt />
+														<img src="http://placehold.it/400x500" width="100" alt="img" />
 													</Nav.Link>
 												</Nav.Item>
 												<Nav.Item>
 													<Nav.Link className="pt mr-3 mb-3" eventKey="second">
-														<img src="http://placehold.it/400x500" width="100" alt />
+														<img src="http://placehold.it/400x500" width="100" alt="img" />
 													</Nav.Link>
 												</Nav.Item>
 												<Nav.Item>
 													<Nav.Link className="pt" eventKey="third">
-														<img src="http://placehold.it/400x500" width="100" alt />
+														<img src="http://placehold.it/400x500" width="100" alt="img" />
 													</Nav.Link>
 												</Nav.Item>
 											</Nav>
@@ -88,8 +100,8 @@ const ProductPage = ({ props }) => {
 										</div>
 										<div className="pd-desc">
 											<p>
-												Lorem ipsum dolor sit amet, consectetur ing elit, sed do eiusmod tempor sum dolor sit amet,
-												consectetur adipisicing elit, sed do mod tempor
+												Lorem ipsum dolor sit amet, consectetur ing elit, sed do eiusmod tempor sum
+												dolor sit amet, consectetur adipisicing elit, sed do mod tempor
 											</p>
 											<h4>
 												$495.00 <span>629.99</span>
@@ -132,9 +144,9 @@ const ProductPage = ({ props }) => {
 										</div>
 										<div className="quantity">
 											<div className="pro-qty">
-												<span class="dec qtybtn">-</span>
+												<span className="dec qtybtn">-</span>
 												<input type="text" defaultValue={1} />
-												<span class="inc qtybtn">+</span>
+												<span className="inc qtybtn">+</span>
 											</div>
 											<a href="#!" className="primary-btn pd-cart">
 												Add To Cart
@@ -188,17 +200,17 @@ const ProductPage = ({ props }) => {
 														<div className="col-12">
 															<h5>Introduction</h5>
 															<p>
-																Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-																incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-																exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-																dolor in{' '}
+																Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+																eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+																ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+																aliquip ex ea commodo consequat. Duis aute irure dolor in{' '}
 															</p>
 															<h5>Features</h5>
 															<p>
-																Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-																incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-																exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-																dolor in{' '}
+																Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+																eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+																ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+																aliquip ex ea commodo consequat. Duis aute irure dolor in{' '}
 															</p>
 														</div>
 													</div>
@@ -275,7 +287,7 @@ const ProductPage = ({ props }) => {
 															<div className="comment-option">
 																<div className="co-item">
 																	<div className="avatar-pic">
-																		<img src="/img/product-single/avatar-1.png" alt />
+																		<img src="/img/product-single/avatar-1.png" alt="img" />
 																	</div>
 																	<div className="avatar-text">
 																		<div className="at-rating">
@@ -293,7 +305,7 @@ const ProductPage = ({ props }) => {
 																</div>
 																<div className="co-item">
 																	<div className="avatar-pic">
-																		<img src="/img/product-single/avatar-2.png" alt />
+																		<img src="/img/product-single/avatar-2.png" alt="img" />
 																	</div>
 																	<div className="avatar-text">
 																		<div className="at-rating">

@@ -40,7 +40,7 @@ const CartPage = ({ props }) => {
 									<tbody>
 										<tr>
 											<td className="cart-pic first-row">
-												<img src="http://placehold.it/166x166" alt />
+												<img src="http://placehold.it/166x166" alt="img" />
 											</td>
 											<td className="cart-title first-row">
 												<h5>Pure Pineapple</h5>
@@ -49,9 +49,9 @@ const CartPage = ({ props }) => {
 											<td className="qua-col first-row">
 												<div className="quantity">
 													<div className="pro-qty">
-														<span class="dec qtybtn">-</span>
+														<span className="dec qtybtn">-</span>
 														<input type="text" defaultValue={1} />
-														<span class="inc qtybtn">+</span>
+														<span className="inc qtybtn">+</span>
 													</div>
 												</div>
 											</td>
@@ -62,7 +62,7 @@ const CartPage = ({ props }) => {
 										</tr>
 										<tr>
 											<td className="cart-pic">
-												<img src="http://placehold.it/166x166" alt />
+												<img src="http://placehold.it/166x166" alt="img" />
 											</td>
 											<td className="cart-title">
 												<h5>American lobster</h5>
@@ -71,9 +71,9 @@ const CartPage = ({ props }) => {
 											<td className="qua-col">
 												<div className="quantity">
 													<div className="pro-qty">
-														<span class="dec qtybtn">-</span>
+														<span className="dec qtybtn">-</span>
 														<input type="text" defaultValue={1} />
-														<span class="inc qtybtn">+</span>
+														<span className="inc qtybtn">+</span>
 													</div>
 												</div>
 											</td>
@@ -84,7 +84,7 @@ const CartPage = ({ props }) => {
 										</tr>
 										<tr>
 											<td className="cart-pic">
-												<img src="http://placehold.it/166x166" alt />
+												<img src="http://placehold.it/166x166" alt="img" />
 											</td>
 											<td className="cart-title">
 												<h5>Guangzhou sweater</h5>
@@ -93,9 +93,9 @@ const CartPage = ({ props }) => {
 											<td className="qua-col">
 												<div className="quantity">
 													<div className="pro-qty">
-														<span class="dec qtybtn">-</span>
+														<span className="dec qtybtn">-</span>
 														<input type="text" defaultValue={1} />
-														<span class="inc qtybtn">+</span>
+														<span className="inc qtybtn">+</span>
 													</div>
 												</div>
 											</td>
@@ -110,10 +110,10 @@ const CartPage = ({ props }) => {
 							<div className="row">
 								<div className="col-lg-4">
 									<div className="cart-buttons">
-										<a href="#" className="primary-btn continue-shop">
+										<a href="#!" className="primary-btn continue-shop">
 											Continue shopping
 										</a>
-										<a href="#" className="primary-btn up-cart">
+										<a href="#!" className="primary-btn up-cart">
 											Update cart
 										</a>
 									</div>
@@ -137,7 +137,7 @@ const CartPage = ({ props }) => {
 												Total <span>$240.00</span>
 											</li>
 										</ul>
-										<a href="#" className="proceed-btn">
+										<a href="#!" className="proceed-btn">
 											PROCEED TO CHECK OUT
 										</a>
 									</div>

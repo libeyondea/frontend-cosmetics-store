@@ -9,7 +9,7 @@ const BannerHome = () => {
 						<div className="col-lg-4">
 							<div className="single-benefit">
 								<div className="sb-icon">
-									<img src="img/icon-1.png" alt />
+									<img src="img/icon-1.png" alt="img" />
 								</div>
 								<div className="sb-text">
 									<h6>Free Shipping</h6>
@@ -20,7 +20,7 @@ const BannerHome = () => {
 						<div className="col-lg-4">
 							<div className="single-benefit">
 								<div className="sb-icon">
-									<img src="img/icon-2.png" alt />
+									<img src="img/icon-2.png" alt="img" />
 								</div>
 								<div className="sb-text">
 									<h6>Delivery On Time</h6>
@@ -31,7 +31,7 @@ const BannerHome = () => {
 						<div className="col-lg-4">
 							<div className="single-benefit">
 								<div className="sb-icon">
-									<img src="img/icon-1.png" alt />
+									<img src="img/icon-1.png" alt="img" />
 								</div>
 								<div className="sb-text">
 									<h6>Secure Payment</h6>

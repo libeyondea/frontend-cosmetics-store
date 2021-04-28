@@ -111,7 +111,7 @@ function* singleUser(action) {
 
 function* updateUser(action) {
 	try {
-		const { user_name, user, router } = action.payload;
+		const { user_name, user } = action.payload;
 		const res = yield call(userAPI.update, user_name, user);
 		if (res.success) {
 			yield put(updateUserSucceedAction(res.result));

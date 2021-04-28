@@ -1,6 +1,5 @@
 import httpRequest from '../utils/httpRequest';
 import config from 'config';
-import qs from 'qs';
 
 const postAPI = {
 	list: async (page = 1, limit = config.LIMIT_PAGE.LIST_POST_HOME) => {
@@ -57,7 +56,11 @@ const postAPI = {
 		});
 		return data;
 	},
-	listByFavoritedUser: async (favorited_user_name, page = 0, limit = config.LIMIT_PAGE.LIST_POST_FAVORITED) => {
+	listByFavoritedUser: async (
+		favorited_user_name,
+		page = 0,
+		limit = config.LIMIT_PAGE.LIST_POST_FAVORITED
+	) => {
 		const { data } = await httpRequest.get({
 			url: '/posts',
 			params: {

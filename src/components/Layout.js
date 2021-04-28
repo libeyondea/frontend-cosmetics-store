@@ -62,7 +62,11 @@ const Layout = ({ children }) => {
 						<div className="ht-right">
 							<Maybe test={login.is_authenticated}>
 								<Dropdown as={NavItem} className="top-panel-user bg-white">
-									<Dropdown.Toggle as={NavLink} id="dropdown-custom-1" className="pt-0 pb-0 dropdown-toggle-custom">
+									<Dropdown.Toggle
+										as={NavLink}
+										id="dropdown-custom-1"
+										className="pt-0 pb-0 dropdown-toggle-custom"
+									>
 										<i className="fa fa-user" />
 										{login.user?.user_name}
 									</Dropdown.Toggle>
@@ -145,7 +149,7 @@ const Layout = ({ children }) => {
 													<tbody>
 														<tr>
 															<td className="si-pic">
-																<img src="http://placehold.it/70x70" alt />
+																<img src="http://placehold.it/70x70" alt="img" />
 															</td>
 															<td className="si-text">
 																<div className="product-selected">
@@ -159,7 +163,7 @@ const Layout = ({ children }) => {
 														</tr>
 														<tr>
 															<td className="si-pic">
-																<img src="http://placehold.it/70x70" alt />
+																<img src="http://placehold.it/70x70" alt="img" />
 															</td>
 															<td className="si-text">
 																<div className="product-selected">
@@ -276,27 +280,27 @@ const Layout = ({ children }) => {
 					>
 						<div className="logo-item">
 							<div className="tablecell-inner">
-								<img src="/img/logo-carousel/logo-1.png" alt />
+								<img src="/img/logo-carousel/logo-1.png" alt="img" />
 							</div>
 						</div>
 						<div className="logo-item">
 							<div className="tablecell-inner">
-								<img src="/img/logo-carousel/logo-2.png" alt />
+								<img src="/img/logo-carousel/logo-2.png" alt="img" />
 							</div>
 						</div>
 						<div className="logo-item">
 							<div className="tablecell-inner">
-								<img src="/img/logo-carousel/logo-3.png" alt />
+								<img src="/img/logo-carousel/logo-3.png" alt="img" />
 							</div>
 						</div>
 						<div className="logo-item">
 							<div className="tablecell-inner">
-								<img src="/img/logo-carousel/logo-4.png" alt />
+								<img src="/img/logo-carousel/logo-4.png" alt="img" />
 							</div>
 						</div>
 						<div className="logo-item">
 							<div className="tablecell-inner">
-								<img src="/img/logo-carousel/logo-5.png" alt />
+								<img src="/img/logo-carousel/logo-5.png" alt="img" />
 							</div>
 						</div>
 					</Carousell>
@@ -309,11 +313,13 @@ const Layout = ({ children }) => {
 							<div className="footer-left">
 								<div className="footer-logo">
 									<a href="#!">
-										<img class="rounded-circle" width="66" src="/img/d4z.jpg" alt="Logo" />
+										<img className="rounded-circle" width="66" src="/img/d4z.jpg" alt="Logo" />
 									</a>
 								</div>
 								<ul>
-									<li>Address: Trường Chinh, Phường 15, Tân Bình, Thành phố Hồ Chí Minh, Việt Nam</li>
+									<li>
+										Address: Trường Chinh, Phường 15, Tân Bình, Thành phố Hồ Chí Minh, Việt Nam
+									</li>
 									<li>Phone: +84 33.6077.131</li>
 									<li>Email: nguyenhienthuc666@gmail.com</li>
 								</ul>
