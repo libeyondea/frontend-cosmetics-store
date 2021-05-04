@@ -1,7 +1,14 @@
 import { all } from 'redux-saga/effects';
-import { listProductWatcher, listPostTagWatcher, listProductCategoryWatcher, singlePostWatcher } from './productSaga';
-import { singleTagWatcher, listTagWatcher } from './tagSaga';
-import { singleCategoryWatcher, listCategoryWatcher } from './categorySaga';
+import {
+	listProductWatcher,
+	listPostTagWatcher,
+	listProductCategoryWatcher,
+	singleProductWatcher
+} from './productSaga';
+import { listTagWatcher } from './tagSaga';
+import { listCartWatcher } from './cartSaga';
+import { listCategoryWatcher } from './categorySaga';
+import { listBrandWatcher } from './brandSaga';
 import { listCommentWatcher } from './commentSaga';
 import {
 	loginUserWatcher,
@@ -14,14 +21,14 @@ import {
 
 function* rootSaga() {
 	yield all([
+		listCartWatcher(),
 		listProductWatcher(),
 		listPostTagWatcher(),
 		listProductCategoryWatcher(),
-		singlePostWatcher(),
+		listBrandWatcher(),
+		singleProductWatcher(),
 		listTagWatcher(),
-		singleTagWatcher(),
 		listCategoryWatcher(),
-		singleCategoryWatcher(),
 		loginUserWatcher(),
 		registerUserWatcher(),
 		currentUserWatcher(),

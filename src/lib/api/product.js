@@ -26,6 +26,8 @@ const postAPI = {
 	listByCategory: async (
 		category_slug,
 		brands = [],
+		sort_field = null,
+		sort_type = null,
 		price_from = null,
 		price_to = null,
 		page = 1,
@@ -37,6 +39,8 @@ const postAPI = {
 				provider: 'category',
 				slug: category_slug,
 				brands: brands,
+				sort_field: sort_field,
+				sort_type: sort_type,
 				price_from: price_from,
 				price_to: price_to,
 				offset: (page - 1) * limit,
@@ -73,7 +77,7 @@ const postAPI = {
 	},
 	single: async (slug) => {
 		const { data } = await httpRequest.get({
-			url: `/posts/${slug}`
+			url: `/products/${slug}`
 		});
 		return data;
 	}

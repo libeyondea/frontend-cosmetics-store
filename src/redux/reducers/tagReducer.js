@@ -1,11 +1,4 @@
-import {
-	LIST_TAG_REQUESTED,
-	LIST_TAG_SUCCEED,
-	LIST_TAG_FAILED,
-	SINGLE_TAG_REQUESTED,
-	SINGLE_TAG_SUCCEED,
-	SINGLE_TAG_FAILED
-} from '../constants';
+import { LIST_TAG_REQUESTED, LIST_TAG_SUCCEED, LIST_TAG_FAILED } from '../constants';
 
 const initialState = {
 	list_tag: {
@@ -43,33 +36,6 @@ const tagReducer = (state = initialState, action) => {
 				...state,
 				list_tag: {
 					...state.list_tag,
-					errors: action.payload.errors
-				}
-			};
-		//
-		case SINGLE_TAG_REQUESTED:
-			return {
-				...state,
-				single_tag: {
-					...state.single_tag,
-					tag: {},
-					is_loading: true
-				}
-			};
-		case SINGLE_TAG_SUCCEED:
-			return {
-				...state,
-				single_tag: {
-					...state.single_tag,
-					tag: action.payload.tag,
-					is_loading: false
-				}
-			};
-		case SINGLE_TAG_FAILED:
-			return {
-				...state,
-				single_tag: {
-					...state.single_tag,
 					errors: action.payload.errors
 				}
 			};

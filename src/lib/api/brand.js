@@ -1,10 +1,10 @@
 import httpRequest from '../utils/httpRequest';
 import config from 'config';
 
-const categoryAPI = {
+const cartAPI = {
 	list: async (page = 1, limit = config.LIMIT_PAGE.LIST_CATEGORY) => {
 		const { data } = await httpRequest.get({
-			url: `/categories`,
+			url: `/carts`,
 			params: {
 				offset: (page - 1) * limit,
 				limit: limit
@@ -14,4 +14,4 @@ const categoryAPI = {
 	}
 };
 
-export default categoryAPI;
+export default cartAPI;

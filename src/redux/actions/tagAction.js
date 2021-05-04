@@ -1,11 +1,4 @@
-import {
-	LIST_TAG_REQUESTED,
-	LIST_TAG_SUCCEED,
-	LIST_TAG_FAILED,
-	SINGLE_TAG_REQUESTED,
-	SINGLE_TAG_SUCCEED,
-	SINGLE_TAG_FAILED
-} from '../constants';
+import { LIST_TAG_REQUESTED, LIST_TAG_SUCCEED, LIST_TAG_FAILED } from '../constants';
 
 export const listTagRequestedAction = (page) => ({
 	type: LIST_TAG_REQUESTED,
@@ -21,25 +14,6 @@ export const listTagSucceedAction = (tags) => ({
 });
 export const listTagFailedAction = (errors) => ({
 	type: LIST_TAG_FAILED,
-	payload: {
-		errors: errors
-	}
-});
-
-export const singleTagRequestedAction = (slug) => ({
-	type: SINGLE_TAG_REQUESTED,
-	payload: {
-		slug: slug
-	}
-});
-export const singleTagSucceedAction = (tag) => ({
-	type: SINGLE_TAG_SUCCEED,
-	payload: {
-		tag: tag
-	}
-});
-export const singleTagFailedAction = (errors) => ({
-	type: SINGLE_TAG_FAILED,
 	payload: {
 		errors: errors
 	}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,6 +11,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import useRouter from 'lib/hooks/useRouter';
 import { logoutUserRequestedAction } from 'redux/actions/userAction';
 import Maybe from './Maybe';
+import { listCategoryRequestedAction } from 'redux/actions/categoryAction';
+import MayBeSpinner from './MayBeSpinner';
+import { listCartRequestedAction } from 'redux/actions/cartAction';
+
+const totalObj = function (arr, prop) {
+	return arr.reduce(function (a, b) {
+		return a + b[prop];
+	}, 0);
+};
+
+const totalPrice = function (arr, qty, price, discount) {
+	return arr.reduce(function (a, b) {
+		return a + b[qty] * (b[price] - b[discount]);
+	}, 0);
+};
 
 const Layout = ({ children }) => {
 	const responsive = {
@@ -37,12 +52,19 @@ const Layout = ({ children }) => {
 	};
 	const dispatch = useDispatch();
 	const router = useRouter();
+	const listCategory = useSelector((state) => state.categories.list_category);
 	const login = useSelector((state) => state.users.login);
+	const listCart = useSelector((state) => state.carts.list_cart);
 
 	const handleLogoutUser = (e) => {
 		e.preventDefault();
 		dispatch(logoutUserRequestedAction(router));
 	};
+
+	useEffect(() => {
+		dispatch(listCategoryRequestedAction(1));
+		dispatch(listCartRequestedAction(1));
+	}, [dispatch]);
 
 	return (
 		<>
@@ -141,46 +163,43 @@ const Layout = ({ children }) => {
 									<li className="cart-icon">
 										<a href="#!">
 											<i className="icon_bag_alt" />
-											<span>3</span>
+											<span>{totalObj(listCart.carts, 'quantity_in_carts')}</span>
 										</a>
 										<div className="cart-hover">
 											<div className="select-items">
 												<table>
 													<tbody>
-														<tr>
-															<td className="si-pic">
-																<img src="http://placehold.it/70x70" alt="img" />
-															</td>
-															<td className="si-text">
-																<div className="product-selected">
-																	<p>$60.00 x 1</p>
-																	<h6>Kabino Bedside Table</h6>
-																</div>
-															</td>
-															<td className="si-close">
-																<i className="ti-close" />
-															</td>
-														</tr>
-														<tr>
-															<td className="si-pic">
-																<img src="http://placehold.it/70x70" alt="img" />
-															</td>
-															<td className="si-text">
-																<div className="product-selected">
-																	<p>$60.00 x 1</p>
-																	<h6>Kabino Bedside Table</h6>
-																</div>
-															</td>
-															<td className="si-close">
-																<i className="ti-close" />
-															</td>
-														</tr>
+														{listCart.carts.map((item) => (
+															<tr>
+																<td className="si-pic">
+																	<img src="http://placehold.it/70x70" alt="img" />
+																</td>
+																<td className="si-text">
+																	<div className="product-selected">
+																		<p>
+																			{parseFloat(item.discount) === 0 || !item.discount ? (
+																				<>{item.price}₫</>
+																			) : (
+																				<>{item.price - parseFloat(item.discount)}₫</>
+																			)}{' '}
+																			x {item.quantity_in_carts}
+																		</p>
+																		<h6>{item.title}</h6>
+																	</div>
+																</td>
+																<td className="si-close">
+																	<i className="ti-close" />
+																</td>
+															</tr>
+														))}
 													</tbody>
 												</table>
 											</div>
 											<div className="select-total">
 												<span>total:</span>
-												<h5>$120.00</h5>
+												<h5>
+													{totalPrice(listCart.carts, 'quantity_in_carts', 'price', 'discount')}₫
+												</h5>
 											</div>
 											<div className="select-button">
 												<a href="#!" className="primary-btn view-card">
@@ -192,7 +211,9 @@ const Layout = ({ children }) => {
 											</div>
 										</div>
 									</li>
-									<li className="cart-price">$150.00</li>
+									<li className="cart-price">
+										{totalPrice(listCart.carts, 'quantity_in_carts', 'price', 'discount')}₫
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -222,18 +243,18 @@ const Layout = ({ children }) => {
 										Home
 									</Nav.Link>
 								</Nav.Item>
-								<Nav.Item>
-									<Nav.Link to="/shop" as={Link}>
-										Shop
-									</Nav.Link>
-								</Nav.Item>
 								<Dropdown as={NavItem}>
 									<Dropdown.Toggle as={NavLink} id="dropdown-custom-1">
 										Categories
 									</Dropdown.Toggle>
 									<Dropdown.Menu align="right">
-										<Dropdown.Item>One</Dropdown.Item>
-										<Dropdown.Item>Two</Dropdown.Item>
+										<MayBeSpinner test={listCategory.is_loading} spinner={<>Loading...</>}>
+											{listCategory.categories.map((item) => (
+												<Dropdown.Item as={Link} to={`/category/${item.slug}`} key={item.id}>
+													{item.title}
+												</Dropdown.Item>
+											))}
+										</MayBeSpinner>
 									</Dropdown.Menu>
 								</Dropdown>
 								<Nav.Item>

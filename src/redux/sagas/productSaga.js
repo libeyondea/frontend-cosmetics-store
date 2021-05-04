@@ -3,7 +3,7 @@ import {
 	LIST_PRODUCT_REQUESTED,
 	LIST_POST_TAG_REQUESTED,
 	LIST_PRODUCT_CATEGORY_REQUESTED,
-	SINGLE_POST_REQUESTED
+	SINGLE_PRODUCT_REQUESTED
 } from '../constants';
 import {
 	listProductSucceedAction,
@@ -12,8 +12,8 @@ import {
 	listPostTagFailedAction,
 	listProductCategorySucceedAction,
 	listProductCategoryFailedAction,
-	singlePostSucceedAction,
-	singlePostFailedAction
+	singleProductSucceedAction,
+	singleProductFailedAction
 } from '../actions/productAction';
 import productAPI from '../../lib/api/product';
 
@@ -43,8 +43,25 @@ function* listPostTag(action) {
 
 function* listProductCategory(action) {
 	try {
-		const { category_slug, brands, price_from, price_to, page } = action.payload;
-		const res = yield call(productAPI.listByCategory, category_slug, brands, price_from, price_to, page);
+		const {
+			category_slug,
+			brands,
+			price_from,
+			price_to,
+			page,
+			sort_type,
+			sort_field
+		} = action.payload;
+		const res = yield call(
+			productAPI.listByCategory,
+			category_slug,
+			brands,
+			sort_field,
+			sort_type,
+			price_from,
+			price_to,
+			page
+		);
 		if (res.success) {
 			yield put(listProductCategorySucceedAction(res.data, res.meta.products_count));
 		}
@@ -53,15 +70,15 @@ function* listProductCategory(action) {
 	}
 }
 
-function* singlePost(action) {
+function* singleProduct(action) {
 	try {
 		const { slug } = action.payload;
 		const res = yield call(productAPI.single, slug);
 		if (res.success) {
-			yield put(singlePostSucceedAction(res.data));
+			yield put(singleProductSucceedAction(res.data));
 		}
 	} catch (err) {
-		yield put(singlePostFailedAction(err.message));
+		yield put(singleProductFailedAction(err.message));
 	}
 }
 
@@ -77,6 +94,6 @@ export function* listProductCategoryWatcher() {
 	yield takeLatest(LIST_PRODUCT_CATEGORY_REQUESTED, listProductCategory);
 }
 
-export function* singlePostWatcher() {
-	yield takeLatest(SINGLE_POST_REQUESTED, singlePost);
+export function* singleProductWatcher() {
+	yield takeLatest(SINGLE_PRODUCT_REQUESTED, singleProduct);
 }

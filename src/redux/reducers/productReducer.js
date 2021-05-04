@@ -8,9 +8,9 @@ import {
 	LIST_PRODUCT_CATEGORY_REQUESTED,
 	LIST_PRODUCT_CATEGORY_SUCCEED,
 	LIST_PRODUCT_CATEGORY_FAILED,
-	SINGLE_POST_REQUESTED,
-	SINGLE_POST_SUCCEED,
-	SINGLE_POST_FAILED
+	SINGLE_PRODUCT_REQUESTED,
+	SINGLE_PRODUCT_SUCCEED,
+	SINGLE_PRODUCT_FAILED
 } from '../constants';
 
 const initialState = {
@@ -32,8 +32,8 @@ const initialState = {
 		is_loading: true,
 		errors: null
 	},
-	single_post: {
-		post: {},
+	single_product: {
+		product: {},
 		is_loading: true,
 		errors: null
 	}
@@ -121,28 +121,28 @@ const producrReducer = (state = initialState, action) => {
 				}
 			};
 		//
-		case SINGLE_POST_REQUESTED:
+		case SINGLE_PRODUCT_REQUESTED:
 			return {
 				...state,
-				single_post: {
-					...state.single_post,
+				single_product: {
+					...state.single_product,
 					is_loading: true
 				}
 			};
-		case SINGLE_POST_SUCCEED:
+		case SINGLE_PRODUCT_SUCCEED:
 			return {
 				...state,
-				single_post: {
-					...state.single_post,
-					post: action.payload.post,
+				single_product: {
+					...state.single_product,
+					product: action.payload.product,
 					is_loading: false
 				}
 			};
-		case SINGLE_POST_FAILED:
+		case SINGLE_PRODUCT_FAILED:
 			return {
 				...state,
-				single_post: {
-					...state.single_post,
+				single_product: {
+					...state.single_product,
 					errors: action.payload.errors
 				}
 			};

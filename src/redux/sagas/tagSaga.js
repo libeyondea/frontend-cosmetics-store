@@ -1,11 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { SINGLE_TAG_REQUESTED, LIST_TAG_REQUESTED } from '../constants';
-import {
-	singleTagSucceedAction,
-	singleTagFailedAction,
-	listTagSucceedAction,
-	listTagFailedAction
-} from '../actions/tagAction';
+import { LIST_TAG_REQUESTED } from '../constants';
+import { listTagSucceedAction, listTagFailedAction } from '../actions/tagAction';
 import tagAPI from '../../lib/api/tag';
 
 function* listTag(action) {
@@ -20,22 +15,6 @@ function* listTag(action) {
 	}
 }
 
-function* singleTag(action) {
-	try {
-		const { slug } = action.payload;
-		const res = yield call(tagAPI.single, slug);
-		if (res.success) {
-			yield put(singleTagSucceedAction(res.data));
-		}
-	} catch (err) {
-		yield put(singleTagFailedAction(err.message));
-	}
-}
-
 export function* listTagWatcher() {
 	yield takeLatest(LIST_TAG_REQUESTED, listTag);
-}
-
-export function* singleTagWatcher() {
-	yield takeLatest(SINGLE_TAG_REQUESTED, singleTag);
 }

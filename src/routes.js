@@ -19,7 +19,7 @@ const Routes = () => {
 					<Route exact path="/register" component={RegisterPage} />
 					<Route exact path="/login" component={LoginPage} />
 					<Route exact path="/cart" component={CartPage} />
-					<Route exact path="/p/product" component={ProductPage} />
+					<Route exact path="/p/:slug" component={ProductPage} />
 					<Route exact path="/category/:slug" component={CategoryProductPage} />
 					<Route exact path="/contact" component={ContactPage} />
 					<Route exact path="/faq" component={FaqPage} />

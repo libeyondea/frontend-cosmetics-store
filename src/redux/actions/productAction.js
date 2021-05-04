@@ -8,9 +8,9 @@ import {
 	LIST_PRODUCT_CATEGORY_REQUESTED,
 	LIST_PRODUCT_CATEGORY_SUCCEED,
 	LIST_PRODUCT_CATEGORY_FAILED,
-	SINGLE_POST_REQUESTED,
-	SINGLE_POST_SUCCEED,
-	SINGLE_POST_FAILED
+	SINGLE_PRODUCT_REQUESTED,
+	SINGLE_PRODUCT_SUCCEED,
+	SINGLE_PRODUCT_FAILED
 } from '../constants';
 
 export const listProductRequestedAction = (page) => ({
@@ -54,11 +54,21 @@ export const listPostTagFailedAction = (errors) => ({
 	}
 });
 //
-export const listProductCategoryRequestedAction = (category_slug, brands, price_from, price_to, page) => ({
+export const listProductCategoryRequestedAction = (
+	category_slug,
+	brands,
+	sort_field,
+	sort_type,
+	price_from,
+	price_to,
+	page
+) => ({
 	type: LIST_PRODUCT_CATEGORY_REQUESTED,
 	payload: {
 		category_slug: category_slug,
 		brands: brands,
+		sort_field: sort_field,
+		sort_type: sort_type,
 		price_from: price_from,
 		price_to: price_to,
 		page: page
@@ -78,20 +88,20 @@ export const listProductCategoryFailedAction = (errors) => ({
 	}
 });
 //
-export const singlePostRequestedAction = (slug) => ({
-	type: SINGLE_POST_REQUESTED,
+export const singleProductRequestedAction = (slug) => ({
+	type: SINGLE_PRODUCT_REQUESTED,
 	payload: {
 		slug: slug
 	}
 });
-export const singlePostSucceedAction = (post) => ({
-	type: SINGLE_POST_SUCCEED,
+export const singleProductSucceedAction = (product) => ({
+	type: SINGLE_PRODUCT_SUCCEED,
 	payload: {
-		post: post
+		product: product
 	}
 });
-export const singlePostFailedAction = (errors) => ({
-	type: SINGLE_POST_FAILED,
+export const singleProductFailedAction = (errors) => ({
+	type: SINGLE_PRODUCT_FAILED,
 	payload: {
 		errors: errors
 	}

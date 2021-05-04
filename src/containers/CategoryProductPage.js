@@ -6,29 +6,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProductCategoryRequestedAction } from 'redux/actions/productAction';
 import useRouter from 'lib/hooks/useRouter';
 import MayBeSpinner from 'components/MayBeSpinner';
+import { listCategoryRequestedAction } from 'redux/actions/categoryAction';
+import { Link } from 'react-router-dom';
+import { listBrandRequestedAction } from 'redux/actions/brandAction';
 
 const CategoryProductPage = ({ props }) => {
 	const [amount, setAmount] = useState([10000, 10000000]);
 	const [price, setPrice] = useState([]);
 	const [brands, setBrands] = useState([]);
+	const [sortValue, setSortValue] = useState('desc_date');
+	const [sortBy, setSortBy] = useState([]);
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const listProductCategory = useSelector((state) => state.products.list_product_category);
+	const listCategory = useSelector((state) => state.categories.list_category);
+	const listBrand = useSelector((state) => state.brands.list_brand);
 	const {
 		query: { slug }
 	} = router;
-	const brandsFake = [
-		{
-			id: 1,
-			title: 'Innidfree',
-			slug: 'innidfree'
-		},
-		{
-			id: 2,
-			title: 'Vichy',
-			slug: 'vichy'
-		}
-	];
 
 	const onChangeAmount = (value) => {
 		setAmount([value[0], value[1]]);
@@ -42,8 +37,14 @@ const CategoryProductPage = ({ props }) => {
 	);
 
 	useEffect(() => {
-		dispatch(listProductCategoryRequestedAction(slug, brands, price[0], price[1]));
-	}, [brands, dispatch, price, slug]);
+		dispatch(listBrandRequestedAction(1));
+	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(
+			listProductCategoryRequestedAction(slug, brands, sortBy[0], sortBy[1], price[0], price[1])
+		);
+	}, [brands, dispatch, price, slug, sortBy]);
 
 	const handleCheckboxChange = (event) => {
 		let newArray = [...brands, event.target.id];
@@ -51,6 +52,27 @@ const CategoryProductPage = ({ props }) => {
 			newArray = newArray.filter((day) => day !== event.target.id);
 		}
 		setBrands(newArray);
+	};
+
+	const handleSortBy = (event) => {
+		let value = event.target.value;
+		let sortField = '';
+		let sortType = '';
+		if (value === 'desc_date') {
+			sortField = 'created_at';
+			sortType = 'desc';
+		} else if (value === 'asc_date') {
+			sortField = 'created_at';
+			sortType = 'asc';
+		} else if (value === 'desc_price') {
+			sortField = 'price';
+			sortType = 'desc';
+		} else if (value === 'asc_price') {
+			sortField = 'price';
+			sortType = 'asc';
+		}
+		setSortValue(value);
+		setSortBy([sortField, sortType]);
 	};
 
 	return (
@@ -76,21 +98,19 @@ const CategoryProductPage = ({ props }) => {
 							<div className="filter-widget">
 								<h4 className="fw-title">Categories</h4>
 								<ul className="filter-catagories">
-									<li>
-										<a href="#!">Men</a>
-									</li>
-									<li>
-										<a href="#!">Women</a>
-									</li>
-									<li>
-										<a href="#!">Kids</a>
-									</li>
+									<MayBeSpinner test={listCategory.is_loading} spinner={<>Loading...</>}>
+										{listCategory.categories.map((item) => (
+											<li key={item.id}>
+												<Link to={`/category/${item.slug}`}>{item.title}</Link>
+											</li>
+										))}
+									</MayBeSpinner>
 								</ul>
 							</div>
 							<div className="filter-widget">
 								<h4 className="fw-title">Brands</h4>
 								<div className="fw-brand-check">
-									{brandsFake.map((item) => (
+									{listBrand.brands.map((item) => (
 										<div className="bc-item" key={item.id}>
 											<label htmlFor={item.slug}>
 												{item.title}
@@ -142,19 +162,17 @@ const CategoryProductPage = ({ props }) => {
 								<div className="row">
 									<div className="col-lg-7 col-md-7">
 										<div className="select-option">
-											<select className="custom-select sorting" defaultValue="desc">
-												<option value="asc">Asc date</option>
-												<option value="desc">Desc date</option>
-												<option value="asc">Asc price</option>
-												<option value="desc">Desc price</option>
-												<option value="asc">Asc selling</option>
-												<option value="desc">Desc selling</option>
-											</select>
-											<select className="custom-select p-show" defaultValue="10">
-												<option value="10">Show: 10</option>
-												<option value="20">Show: 20</option>
-												<option value="50">Show: 50</option>
-												<option value="100">Show: 100</option>
+											<select
+												className="custom-select sorting"
+												onChange={handleSortBy}
+												value={sortValue}
+											>
+												<option value="desc_date">Desc date</option>
+												<option value="asc_date">Asc date</option>
+												<option value="desc_price">Desc price</option>
+												<option value="asc_price">Asc price</option>
+												<option value="desc_selling">Desc selling</option>
+												<option value="asc_selling">Asc selling</option>
 											</select>
 										</div>
 									</div>
