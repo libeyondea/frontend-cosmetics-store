@@ -63,8 +63,10 @@ const Layout = ({ children }) => {
 
 	useEffect(() => {
 		dispatch(listCategoryRequestedAction(1));
-		dispatch(listCartRequestedAction(1));
-	}, [dispatch]);
+		if (login.is_authenticated) {
+			dispatch(listCartRequestedAction(1));
+		}
+	}, [dispatch, login.is_authenticated]);
 
 	return (
 		<>
@@ -166,13 +168,16 @@ const Layout = ({ children }) => {
 											<span>{totalObj(listCart.carts, 'quantity_in_carts')}</span>
 										</a>
 										<div className="cart-hover">
-											<div className="select-items">
+											<div className="select-items" style={{ height: '400px', overflow: 'auto' }}>
 												<table>
 													<tbody>
 														{listCart.carts.map((item) => (
-															<tr>
+															<tr key={item.id}>
 																<td className="si-pic">
-																	<img src="http://placehold.it/70x70" alt="img" />
+																	<img
+																		src={`${process.env.REACT_APP_IMAGE_URL}/${item.images[0]?.image_url}`}
+																		alt={item.images[0]?.title}
+																	/>
 																</td>
 																<td className="si-text">
 																	<div className="product-selected">
@@ -202,9 +207,9 @@ const Layout = ({ children }) => {
 												</h5>
 											</div>
 											<div className="select-button">
-												<a href="#!" className="primary-btn view-card">
+												<Link to="/cart" className="primary-btn view-card">
 													VIEW CARD
-												</a>
+												</Link>
 												<a href="#!" className="primary-btn checkout-btn">
 													CHECK OUT
 												</a>

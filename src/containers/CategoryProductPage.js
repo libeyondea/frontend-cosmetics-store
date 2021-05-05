@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProductCategoryRequestedAction } from 'redux/actions/productAction';
 import useRouter from 'lib/hooks/useRouter';
 import MayBeSpinner from 'components/MayBeSpinner';
-import { listCategoryRequestedAction } from 'redux/actions/categoryAction';
 import { Link } from 'react-router-dom';
 import { listBrandRequestedAction } from 'redux/actions/brandAction';
+import withAuth from 'lib/hoc/withAuth';
 
 const CategoryProductPage = ({ props }) => {
 	const [amount, setAmount] = useState([10000, 10000000]);
@@ -187,6 +187,7 @@ const CategoryProductPage = ({ props }) => {
 										{listProductCategory.products?.map((product) => (
 											<div className="col-lg-4 col-sm-6" key={product.id}>
 												<ProductCard
+													id={product.id}
 													title={product.title}
 													price={product.price}
 													discount={product.discount}
@@ -211,4 +212,4 @@ const CategoryProductPage = ({ props }) => {
 	);
 };
 
-export default CategoryProductPage;
+export default withAuth(CategoryProductPage);

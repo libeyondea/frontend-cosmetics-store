@@ -6,7 +6,7 @@ import {
 	singleProductWatcher
 } from './productSaga';
 import { listTagWatcher } from './tagSaga';
-import { listCartWatcher } from './cartSaga';
+import { listCartWatcher, addToCartWatcher } from './cartSaga';
 import { listCategoryWatcher } from './categorySaga';
 import { listBrandWatcher } from './brandSaga';
 import { listCommentWatcher } from './commentSaga';
@@ -21,6 +21,7 @@ import {
 
 function* rootSaga() {
 	yield all([
+		addToCartWatcher(),
 		listCartWatcher(),
 		listProductWatcher(),
 		listPostTagWatcher(),

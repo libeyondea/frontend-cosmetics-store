@@ -78,6 +78,7 @@ const HomePage = ({ props }) => {
 								>
 									{listProduct.products?.map((product) => (
 										<ProductCard
+											id={product.id}
 											title={product.title}
 											price={product.price}
 											discount={product.discount}
@@ -123,6 +124,7 @@ const HomePage = ({ props }) => {
 							>
 								{listProduct.products?.map((product) => (
 									<ProductCard
+										id={product.id}
 										title={product.title}
 										price={product.price}
 										discount={product.discount}

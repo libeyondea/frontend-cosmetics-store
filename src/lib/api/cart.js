@@ -13,6 +13,14 @@ const brandAPI = {
 			}
 		});
 		return data;
+	},
+	add: async (cart) => {
+		const { data } = await httpRequest.post({
+			url: `/carts/add-to-cart`,
+			token: getCookie('token'),
+			data: cart
+		});
+		return data;
 	}
 };
 

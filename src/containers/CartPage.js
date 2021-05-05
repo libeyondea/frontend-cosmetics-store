@@ -1,7 +1,22 @@
+import withAuth from 'lib/hoc/withAuth';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Layout from '../components/Layout';
 
+const totalPrice = function (arr, qty, price, discount) {
+	return arr.reduce(function (a, b) {
+		return a + b[qty] * (b[price] - b[discount]);
+	}, 0);
+};
+
+const totalObj = function (arr, prop) {
+	return arr.reduce(function (a, b) {
+		return a + b[prop];
+	}, 0);
+};
 const CartPage = ({ props }) => {
+	const listCart = useSelector((state) => state.carts.list_cart);
+
 	return (
 		<Layout>
 			<div className="breacrumb-section">
@@ -38,72 +53,47 @@ const CartPage = ({ props }) => {
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td className="cart-pic first-row">
-												<img src="http://placehold.it/166x166" alt="img" />
-											</td>
-											<td className="cart-title first-row">
-												<h5>Pure Pineapple</h5>
-											</td>
-											<td className="p-price first-row">$60.00</td>
-											<td className="qua-col first-row">
-												<div className="quantity">
-													<div className="pro-qty">
-														<span className="dec qtybtn">-</span>
-														<input type="text" defaultValue={1} />
-														<span className="inc qtybtn">+</span>
+										{listCart.carts.map((item) => (
+											<tr key={item.id}>
+												<td className="cart-pic first-row">
+													<img
+														src={`${process.env.REACT_APP_IMAGE_URL}/${item.images[0]?.image_url}`}
+														alt={item.images[0]?.title}
+													/>
+												</td>
+												<td className="cart-title first-row">
+													<h5>{item.title}</h5>
+												</td>
+												<td className="p-price first-row">
+													{parseFloat(item.discount) === 0 || !item.discount ? (
+														<>{item.price}₫</>
+													) : (
+														<>{item.price - parseFloat(item.discount)}₫</>
+													)}
+												</td>
+												<td className="qua-col first-row">
+													<div className="quantity">
+														<div className="pro-qty">
+															<span className="dec qtybtn">-</span>
+															<input type="text" defaultValue={item.quantity_in_carts} />
+															<span className="inc qtybtn">+</span>
+														</div>
 													</div>
-												</div>
-											</td>
-											<td className="total-price first-row">$60.00</td>
-											<td className="close-td first-row">
-												<i className="ti-close" />
-											</td>
-										</tr>
-										<tr>
-											<td className="cart-pic">
-												<img src="http://placehold.it/166x166" alt="img" />
-											</td>
-											<td className="cart-title">
-												<h5>American lobster</h5>
-											</td>
-											<td className="p-price">$60.00</td>
-											<td className="qua-col">
-												<div className="quantity">
-													<div className="pro-qty">
-														<span className="dec qtybtn">-</span>
-														<input type="text" defaultValue={1} />
-														<span className="inc qtybtn">+</span>
-													</div>
-												</div>
-											</td>
-											<td className="total-price">$60.00</td>
-											<td className="close-td">
-												<i className="ti-close" />
-											</td>
-										</tr>
-										<tr>
-											<td className="cart-pic">
-												<img src="http://placehold.it/166x166" alt="img" />
-											</td>
-											<td className="cart-title">
-												<h5>Guangzhou sweater</h5>
-											</td>
-											<td className="p-price">$60.00</td>
-											<td className="qua-col">
-												<div className="quantity">
-													<div className="pro-qty">
-														<span className="dec qtybtn">-</span>
-														<input type="text" defaultValue={1} />
-														<span className="inc qtybtn">+</span>
-													</div>
-												</div>
-											</td>
-											<td className="total-price">$60.00</td>
-											<td className="close-td">
-												<i className="ti-close" />
-											</td>
-										</tr>
+												</td>
+												<td className="total-price first-row">
+													{parseFloat(item.discount) === 0 || !item.discount ? (
+														<>{item.price * item.quantity_in_carts}₫</>
+													) : (
+														<>
+															{(item.price - parseFloat(item.discount)) * item.quantity_in_carts}₫
+														</>
+													)}
+												</td>
+												<td className="close-td first-row">
+													<i className="ti-close" />
+												</td>
+											</tr>
+										))}
 									</tbody>
 								</table>
 							</div>
@@ -131,10 +121,19 @@ const CartPage = ({ props }) => {
 									<div className="proceed-checkout">
 										<ul>
 											<li className="subtotal">
-												Subtotal <span>$240.00</span>
+												Toatal quantity <span>{totalObj(listCart.carts, 'quantity_in_carts')}</span>
+											</li>
+											<li className="subtotal">
+												Subtotal{' '}
+												<span>
+													{totalPrice(listCart.carts, 'quantity_in_carts', 'price', 'discount')}₫
+												</span>
 											</li>
 											<li className="cart-total">
-												Total <span>$240.00</span>
+												Total{' '}
+												<span>
+													{totalPrice(listCart.carts, 'quantity_in_carts', 'price', 'discount')}₫
+												</span>
 											</li>
 										</ul>
 										<a href="#!" className="proceed-btn">
@@ -151,4 +150,4 @@ const CartPage = ({ props }) => {
 	);
 };
 
-export default CartPage;
+export default withAuth(CartPage);

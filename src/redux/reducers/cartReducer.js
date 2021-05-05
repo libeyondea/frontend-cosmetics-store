@@ -1,9 +1,21 @@
-import { LIST_CART_FAILED, LIST_CART_REQUESTED, LIST_CART_SUCCEED } from '../constants';
+import {
+	LIST_CART_FAILED,
+	LIST_CART_REQUESTED,
+	LIST_CART_SUCCEED,
+	ADD_TO_CART_FAILED,
+	ADD_TO_CART_REQUESTED,
+	ADD_TO_CART_SUCCEED
+} from '../constants';
 
 const initialState = {
 	list_cart: {
 		carts: [],
 		is_loading: true,
+		errors: null
+	},
+	add_to_cart: {
+		cart: {},
+		is_loading: false,
 		errors: null
 	}
 };
@@ -31,6 +43,32 @@ const cartReducer = (state = initialState, action) => {
 				...state,
 				list_cart: {
 					...state.list_cart,
+					errors: action.payload.errors
+				}
+			};
+		//
+		case ADD_TO_CART_REQUESTED:
+			return {
+				...state,
+				add_to_cart: {
+					...state.add_to_cart,
+					is_loading: true
+				}
+			};
+		case ADD_TO_CART_SUCCEED:
+			return {
+				...state,
+				add_to_cart: {
+					...state.add_to_cart,
+					cart: action.payload.cart,
+					is_loading: false
+				}
+			};
+		case ADD_TO_CART_FAILED:
+			return {
+				...state,
+				add_to_cart: {
+					...state.add_to_cart,
 					errors: action.payload.errors
 				}
 			};

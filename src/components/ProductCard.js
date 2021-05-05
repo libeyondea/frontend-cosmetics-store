@@ -1,7 +1,28 @@
+import useRouter from 'lib/hooks/useRouter';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addToCartRequestedAction, listCartRequestedAction } from 'redux/actions/cartAction';
 
-const ProductCard = ({ title, price, discount, image, slug, category_title }) => {
+const ProductCard = ({ id, title, price, discount, image, slug, category_title }) => {
+	const dispatch = useDispatch();
+	const router = useRouter();
+	const login = useSelector((state) => state.users.login);
+
+	const handleAddToCart = (product_id, quantity) => {
+		if (login.is_authenticated) {
+			const product = {
+				product_id: product_id,
+				quantity: quantity
+			};
+			console.log(product);
+			dispatch(addToCartRequestedAction(product));
+			dispatch(listCartRequestedAction());
+		} else {
+			router.push('/login');
+		}
+	};
+
 	return (
 		<div className="product-item border rounded bg-light shadow">
 			<div className="pi-pic">
@@ -14,17 +35,12 @@ const ProductCard = ({ title, price, discount, image, slug, category_title }) =>
 				</div>
 				<ul>
 					<li className="w-icon active mr-1">
-						<a href="#!">
+						<a href="#!" onClick={handleAddToCart.bind(this, id, 1)}>
 							<i className="icon_bag_alt" />
 						</a>
 					</li>
 					<li className="quick-view  mr-1">
 						<Link to={`/p/${slug}`}>View</Link>
-					</li>
-					<li className="w-icon">
-						<a href="#!">
-							<i className="fa fa-random" />
-						</a>
 					</li>
 				</ul>
 			</div>

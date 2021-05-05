@@ -4,13 +4,42 @@ import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import ProductCard from '../components/ProductCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { singleProductRequestedAction } from '../redux/actions/productAction';
+import {
+	listProductRequestedAction,
+	singleProductRequestedAction
+} from '../redux/actions/productAction';
 import useRouter from 'lib/hooks/useRouter';
 import MayBeSpinner from 'components/MayBeSpinner';
+import Carousel from 'react-multi-carousel';
+import { addToCartRequestedAction, listCartRequestedAction } from 'redux/actions/cartAction';
 
 const ProductPage = ({ props }) => {
+	const responsive = {
+		desktop: {
+			breakpoint: { max: 3000, min: 1024 },
+			items: 5,
+			slidesToSlide: 5
+		},
+		minDestop: {
+			breakpoint: { max: 1024, min: 720 },
+			items: 3,
+			slidesToSlide: 3
+		},
+		tablet: {
+			breakpoint: { max: 720, min: 464 },
+			items: 2,
+			slidesToSlide: 2
+		},
+		mobile: {
+			breakpoint: { max: 464, min: 0 },
+			items: 1,
+			slidesToSlide: 1
+		}
+	};
 	const dispatch = useDispatch();
 	const router = useRouter();
+	const login = useSelector((state) => state.users.login);
+	const listProduct = useSelector((state) => state.products.list_product);
 	const singleProduct = useSelector((state) => state.products.single_product);
 	const {
 		query: { slug }
@@ -18,7 +47,22 @@ const ProductPage = ({ props }) => {
 
 	useEffect(() => {
 		dispatch(singleProductRequestedAction(slug));
+		dispatch(listProductRequestedAction());
 	}, [dispatch, slug]);
+
+	const handleAddToCart = (product_id, quantity) => {
+		if (login.is_authenticated) {
+			const product = {
+				product_id: product_id,
+				quantity: quantity
+			};
+			console.log(product);
+			dispatch(addToCartRequestedAction(product));
+			dispatch(listCartRequestedAction());
+		} else {
+			router.push('/login');
+		}
+	};
 	return (
 		<Layout>
 			<div className="breacrumb-section">
@@ -46,7 +90,7 @@ const ProductPage = ({ props }) => {
 										<Tab.Container id="image-tab" defaultActiveKey="first">
 											<Tab.Content className="product-pic-zoom">
 												{singleProduct.product.images?.map((item) => (
-													<Tab.Pane eventKey="first">
+													<Tab.Pane eventKey="first" key={item.id}>
 														<img
 															className="product-big-img"
 															src={`${process.env.REACT_APP_IMAGE_URL}/${item.image_url}`}
@@ -61,7 +105,7 @@ const ProductPage = ({ props }) => {
 											<div className="product-thumbs">
 												<Nav className="product-thumbs-track ps-slider owl-carousel">
 													{singleProduct.product.images?.map((item) => (
-														<Nav.Item>
+														<Nav.Item key={item.id}>
 															<Nav.Link className="pt mr-3 mb-3" eventKey="first">
 																<img
 																	src={`${process.env.REACT_APP_IMAGE_URL}/${item.image_url}`}
@@ -107,12 +151,16 @@ const ProductPage = ({ props }) => {
 												</h4>
 											</div>
 											<div className="quantity">
-												<div className="pro-qty">
+												{/* <div className="pro-qty">
 													<span className="dec qtybtn">-</span>
 													<input type="text" defaultValue={1} />
 													<span className="inc qtybtn">+</span>
-												</div>
-												<a href="#!" className="primary-btn pd-cart">
+												</div> */}
+												<a
+													href="#!"
+													className="primary-btn pd-cart"
+													onClick={handleAddToCart.bind(this, singleProduct.product.id, 1)}
+												>
 													Add To Cart
 												</a>
 											</div>
@@ -123,7 +171,7 @@ const ProductPage = ({ props }) => {
 												<li>
 													<span>TAGS</span>:{' '}
 													{singleProduct.product.tags?.map((item) => (
-														<>{item.title}</>
+														<span key={item.id}>{item.title}</span>
 													))}
 												</li>
 											</ul>
@@ -313,41 +361,39 @@ const ProductPage = ({ props }) => {
 						</div>
 					</div>
 					<div className="row">
-						<div className="col-lg-3 col-sm-6">
-							<ProductCard
-								title="Product 1565"
-								price="1000000"
-								image="http://placehold.it/666x666"
-								slug="product"
-								category_title="Trang điểm"
-							/>
-						</div>
-						<div className="col-lg-3 col-sm-6">
-							<ProductCard
-								title="Product 1565"
-								price="1000000"
-								image="http://placehold.it/666x666"
-								slug="product"
-								category_title="Trang điểm"
-							/>
-						</div>
-						<div className="col-lg-3 col-sm-6">
-							<ProductCard
-								title="Product 1565"
-								price="1000000"
-								image="http://placehold.it/666x666"
-								slug="product"
-								category_title="Trang điểm"
-							/>
-						</div>
-						<div className="col-lg-3 col-sm-6">
-							<ProductCard
-								title="Product 1565"
-								price="1000000"
-								image="http://placehold.it/666x666"
-								slug="product"
-								category_title="Trang điểm"
-							/>
+						<div className="col-12">
+							<MayBeSpinner test={listProduct.is_loading} spinner={<>Loading...</>}>
+								<Carousel
+									swipeable={true}
+									draggable={true}
+									showDots={true}
+									responsive={responsive}
+									ssr={true}
+									infinite={true}
+									minimumTouchDrag={80}
+									autoPlay={true}
+									autoPlaySpeed={1000}
+									keyBoardControl={true}
+									transitionDuration={1000}
+									containerClass="carousel-container"
+									removeArrowOnDeviceType={['tablet', 'mobile']}
+									dotListClass="custom-dot-list-style"
+									itemClass="px-3"
+								>
+									{listProduct.products?.map((product) => (
+										<ProductCard
+											id={product.id}
+											title={product.title}
+											price={product.price}
+											discount={product.discount}
+											image={product.images[0]?.image_url}
+											slug={product.slug}
+											category_title={product.category?.title}
+											key={product.id}
+										/>
+									))}
+								</Carousel>
+							</MayBeSpinner>
 						</div>
 					</div>
 				</div>
