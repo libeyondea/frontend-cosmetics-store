@@ -1,11 +1,9 @@
 import withAuth from 'lib/hoc/withAuth';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
 import InputForm from '../components/InputForm';
 import SelectForm from '../components/SelectForm';
-import CheckBoxForm from '../components/CheckBoxForm';
-import TextForm from '../components/TextForm';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import useRouter from 'lib/hooks/useRouter';

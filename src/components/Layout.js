@@ -210,9 +210,9 @@ const Layout = ({ children }) => {
 												<Link to="/cart" className="primary-btn view-card">
 													VIEW CARD
 												</Link>
-												<a href="#!" className="primary-btn checkout-btn">
+												<Link to="/checkout" className="primary-btn checkout-btn">
 													CHECK OUT
-												</a>
+												</Link>
 											</div>
 										</div>
 									</li>
