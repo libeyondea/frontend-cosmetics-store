@@ -4,7 +4,10 @@ import {
 	LIST_CART_SUCCEED,
 	ADD_TO_CART_FAILED,
 	ADD_TO_CART_REQUESTED,
-	ADD_TO_CART_SUCCEED
+	ADD_TO_CART_SUCCEED,
+	ORDER_FAILED,
+	ORDER_REQUESTED,
+	ORDER_SUCCEED
 } from '../constants';
 
 const initialState = {
@@ -15,6 +18,11 @@ const initialState = {
 	},
 	add_to_cart: {
 		cart: {},
+		is_loading: false,
+		errors: null
+	},
+	checkout: {
+		order: {},
 		is_loading: false,
 		errors: null
 	}
@@ -69,6 +77,32 @@ const cartReducer = (state = initialState, action) => {
 				...state,
 				add_to_cart: {
 					...state.add_to_cart,
+					errors: action.payload.errors
+				}
+			};
+		//
+		case ORDER_REQUESTED:
+			return {
+				...state,
+				checkout: {
+					...state.checkout,
+					is_loading: true
+				}
+			};
+		case ORDER_SUCCEED:
+			return {
+				...state,
+				checkout: {
+					...state.checkout,
+					order: action.payload.order,
+					is_loading: false
+				}
+			};
+		case ORDER_FAILED:
+			return {
+				...state,
+				checkout: {
+					...state.checkout,
 					errors: action.payload.errors
 				}
 			};

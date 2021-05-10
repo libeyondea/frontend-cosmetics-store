@@ -21,6 +21,14 @@ const brandAPI = {
 			data: cart
 		});
 		return data;
+	},
+	checkout: async (order) => {
+		const { data } = await httpRequest.post({
+			url: `/carts/checkout`,
+			token: getCookie('token'),
+			data: order
+		});
+		return data;
 	}
 };
 

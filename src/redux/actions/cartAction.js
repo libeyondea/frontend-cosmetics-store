@@ -4,7 +4,10 @@ import {
 	LIST_CART_SUCCEED,
 	ADD_TO_CART_FAILED,
 	ADD_TO_CART_REQUESTED,
-	ADD_TO_CART_SUCCEED
+	ADD_TO_CART_SUCCEED,
+	ORDER_FAILED,
+	ORDER_REQUESTED,
+	ORDER_SUCCEED
 } from '../constants';
 
 export const listCartRequestedAction = (page) => ({
@@ -40,6 +43,26 @@ export const addToCartSucceedAction = (cart) => ({
 });
 export const addToCartFailedAction = (errors) => ({
 	type: ADD_TO_CART_FAILED,
+	payload: {
+		errors: errors
+	}
+});
+//
+export const orderRequestedAction = (order, router) => ({
+	type: ORDER_REQUESTED,
+	payload: {
+		order: order,
+		router: router
+	}
+});
+export const orderSucceedAction = (order) => ({
+	type: ORDER_SUCCEED,
+	payload: {
+		order: order
+	}
+});
+export const orderFailedAction = (errors) => ({
+	type: ORDER_FAILED,
 	payload: {
 		errors: errors
 	}
