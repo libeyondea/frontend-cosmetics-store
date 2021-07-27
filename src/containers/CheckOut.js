@@ -124,11 +124,6 @@ const CartPage = ({ props }) => {
 							<Form className="checkout-form">
 								<div className="row">
 									<div className="col-lg-6">
-										<div className="checkout-content">
-											<a href="#!" className="content-btn">
-												Click Here To Login
-											</a>
-										</div>
 										<h4>Biiling Details</h4>
 										<div className="row">
 											<div className="col-lg-6">
@@ -212,9 +207,6 @@ const CartPage = ({ props }) => {
 										</div>
 									</div>
 									<div className="col-lg-6">
-										<div className="checkout-content">
-											<input type="text" placeholder="Enter Your Coupon Code" />
-										</div>
 										<div className="place-order">
 											<h4>Your Order</h4>
 											<div className="order-total">

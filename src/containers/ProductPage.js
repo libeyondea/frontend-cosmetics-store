@@ -272,7 +272,7 @@ const ProductPage = ({ props }) => {
 																<div className="comment-option">
 																	<div className="co-item">
 																		<div className="avatar-pic">
-																			<img src="/img/product-single/avatar-1.png" alt="img" />
+																			<img src="/img/d4z.jpg" alt="img" />
 																		</div>
 																		<div className="avatar-text">
 																			<div className="at-rating">
@@ -283,38 +283,10 @@ const ProductPage = ({ props }) => {
 																				<i className="fa fa-star-o mr-1" />
 																			</div>
 																			<h5>
-																				Brandon Kelley <span>27 Aug 2019</span>
+																				Tester <span>27 Aug 2019</span>
 																			</h5>
 																			<div className="at-reply">Nice !</div>
 																		</div>
-																	</div>
-																	<div className="co-item">
-																		<div className="avatar-pic">
-																			<img src="/img/product-single/avatar-2.png" alt="img" />
-																		</div>
-																		<div className="avatar-text">
-																			<div className="at-rating">
-																				<i className="fa fa-star mr-1" />
-																				<i className="fa fa-star mr-1" />
-																				<i className="fa fa-star mr-1" />
-																				<i className="fa fa-star mr-1" />
-																				<i className="fa fa-star-o mr-1" />
-																			</div>
-																			<h5>
-																				Roy Banks <span>27 Aug 2019</span>
-																			</h5>
-																			<div className="at-reply">Nice !</div>
-																		</div>
-																	</div>
-																</div>
-																<div className="personal-rating">
-																	<h6>Your Ratind</h6>
-																	<div className="rating">
-																		<i className="fa fa-star mr-1" />
-																		<i className="fa fa-star mr-1" />
-																		<i className="fa fa-star mr-1" />
-																		<i className="fa fa-star mr-1" />
-																		<i className="fa fa-star-o mr-1" />
 																	</div>
 																</div>
 															</div>
@@ -323,12 +295,6 @@ const ProductPage = ({ props }) => {
 																	<h4>Leave A Comment</h4>
 																	<form action="#" className="comment-form">
 																		<div className="row">
-																			<div className="col-lg-6">
-																				<input type="text" placeholder="Name" />
-																			</div>
-																			<div className="col-lg-6">
-																				<input type="text" placeholder="Email" />
-																			</div>
 																			<div className="col-lg-12">
 																				<textarea placeholder="Messages" defaultValue={''} />
 																				<button type="submit" className="site-btn">

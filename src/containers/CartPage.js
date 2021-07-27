@@ -1,6 +1,7 @@
 import withAuth from 'lib/hoc/withAuth';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 
 const totalPrice = function (arr, qty, price, discount) {
@@ -100,9 +101,9 @@ const CartPage = ({ props }) => {
 							<div className="row">
 								<div className="col-lg-4">
 									<div className="cart-buttons">
-										<a href="#!" className="primary-btn continue-shop">
+										<Link to="/" className="primary-btn continue-shop">
 											Continue shopping
-										</a>
+										</Link>
 										<a href="#!" className="primary-btn up-cart">
 											Update cart
 										</a>
@@ -136,9 +137,9 @@ const CartPage = ({ props }) => {
 												</span>
 											</li>
 										</ul>
-										<a href="#!" className="proceed-btn">
+										<Link to="/checkout" className="proceed-btn">
 											PROCEED TO CHECK OUT
-										</a>
+										</Link>
 									</div>
 								</div>
 							</div>

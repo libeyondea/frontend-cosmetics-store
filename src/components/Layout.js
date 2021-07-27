@@ -156,12 +156,6 @@ const Layout = ({ children }) => {
 							</div>
 							<div className="col-lg-3 text-right col-md-3">
 								<ul className="nav-right">
-									<li className="heart-icon">
-										<a href="#!">
-											<i className="icon_heart_alt" />
-											<span>1</span>
-										</a>
-									</li>
 									<li className="cart-icon">
 										<a href="#!">
 											<i className="icon_bag_alt" />
@@ -262,9 +256,6 @@ const Layout = ({ children }) => {
 										</MayBeSpinner>
 									</Dropdown.Menu>
 								</Dropdown>
-								<Nav.Item>
-									<Nav.Link>Blog</Nav.Link>
-								</Nav.Item>
 								<Nav.Item>
 									<Nav.Link to="/contact" as={Link}>
 										Contact
